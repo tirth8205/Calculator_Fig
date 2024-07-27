@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 3</title>
+    <link rel="stylesheet" href="css/page3.css">
+</head>
+<body style="position: relative; min-height: 100vh;">
+    <img class="Logo" src="images/logo.png" alt="Logo" />
+    <div class="BackgroundOverlay"></div>
+    <div class="BlurEffect"></div>
+    <div style="font-size: 2em; font-weight: 900; color: #FFFFFF; margin-bottom: 20px;">Critical Insights on Employee Turnover in the <span id="industryName"></span> Industry</div>
+    <div class="Content">
+        <div class="CombinedContent">
+            <div style="color: #E77377;">Employee Exodus Alert!</div>
+            <div id="details"></div>
+        </div>
+        <div class="ButtonWrapper">
+            <button class="ActionButton" onclick="bookDiscoveryCall()">Book a Discovery Call</button>
+        </div>
+    </div>
+    <div class="NavMenuWrapper">
+        <div class="NavMenu">
+            <div class="NavItem" id="step1">Sign Up!</div>
+            <div class="NavItem" id="step2">Enter the Relevant Details</div>
+            <div class="NavItem active" id="step3">Calculate the Cost</div>
+            <div class="NavItem" id="step4">Book a Discovery Call</div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateTurnover(numEmployees, industry) {
+            const industry_data = {
+                "Manufacturing": {"turnover_rate": 0.1612, "turnover_cost": 32635},
+                "Healthcare": {"turnover_rate": 0.3040, "turnover_cost": 51016},
+                "Luxury Retail": {"turnover_rate": 0.5080, "turnover_cost": 20113},
+                "Hospitality": {"turnover_rate": 0.3000, "turnover_cost": 22761},
+                "Other": {"turnover_rate": 0.3400, "turnover_cost": 30614}
+            };
+
+            const data = industry_data[industry];
+
+            const employeesConsideringLeaving = Math.round(numEmployees * data.turnover_rate);
+            const employeesLeavingDueToWorkLifeBalance = Math.round(employeesConsideringLeaving / 3);
+            const estimatedTurnoverCost = employeesLeavingDueToWorkLifeBalance * data.turnover_cost;
+
+            return {
+                employeesConsideringLeaving,
+                employeesLeavingDueToWorkLifeBalance,
+                estimatedTurnoverCost
+            };
+        }
+
+        function loadAndProcessData() {
+            const formData = JSON.parse(localStorage.getItem('formData'));
+            if (formData) {
+                const { companyName, numEmployees, industry } = formData;
+                document.getElementById('industryName').textContent = industry;
+
+                const turnoverData = calculateTurnover(numEmployees, industry);
+
+                const detailsElement = document.getElementById('details');
+                if (detailsElement) {
+                    detailsElement.innerHTML = `
+                        <p>Total Employees: ${numEmployees}</p>
+                        <p>Employees Considering Leaving: ${turnoverData.employeesConsideringLeaving}</p>
+                        <p>Due to Work-Life Balance Issues: ${turnoverData.employeesLeavingDueToWorkLifeBalance}</p>
+                        <p>Estimated Turnover Cost Due to Work-Life Balance Issues: £${turnoverData.estimatedTurnoverCost.toLocaleString()}</p>
+                    `;
+                } else {
+                    console.error('detailsElement not found');
+                }
+            } else {
+                console.error('No formData found in localStorage.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Page loaded. Processing data...');
+            loadAndProcessData();
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 50); // Slight delay to ensure the page is loaded before fade-in
+        });
+
+        function bookDiscoveryCall() {
+            window.location.href = 'page4.html'; // Redirect to page4.html
+        }
+    </script>
+</body>
+</html>

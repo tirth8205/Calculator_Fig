@@ -1,0 +1,245 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto Flex', sans-serif;
+}
+
+.FinalPage {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.Background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.BackgroundOverlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #00928F;
+}
+
+.Title {
+    width: 50%;
+    max-width: 1200px;
+    height: auto;
+    position: absolute;
+    color: #F6F8FF;
+    font-size: 4vw;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.2;
+    word-wrap: break-word;
+    left: 5%;
+    top: 20%;
+    text-align: left;
+}
+
+.InputSection {
+    width: 50%;
+    max-width: 416px;
+    margin: 0 auto;
+    padding: 20px;
+    background: none;
+    top: 40%;
+    position: relative;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+}
+
+.InputLabel {
+    color: white;
+    font-size: 2vw;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 700;
+    text-transform: capitalize;
+    letter-spacing: 1.08px;
+    word-wrap: break-word;
+    margin-top: 20px; /* Added margin to create spacing */
+}
+
+.InputWrapper, .OutputWrapper {
+    width: 100%;
+    height: 60px;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px; /* Added margin to create spacing */
+}
+
+.InputField, .OutputField {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 1.5vw;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.50);
+    padding-left: 10px;
+    border-radius: 20px; /* Added border-radius to make corners rounded */
+}
+
+.ActionButton {
+    color: #0B1519;
+    font-size: 2vw;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.96px;
+    word-wrap: break-word;
+    text-align: center;
+    background: #A89061;
+    padding: 15px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px; /* Added margin-top to create more space */
+}
+
+.BlurEffect {
+    width: 20vw;
+    height: auto;
+    position: absolute;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+    box-shadow: 406.5472717285156px 406.5472717285156px 406.5472717285156px;
+    border: 842.18px white solid;
+    filter: blur(406.55px);
+}
+
+.Logo {
+    width: 10vw;
+    height: auto;
+    position: absolute;
+    left: 3%;
+    top: 5%;
+}
+
+.NavMenuWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.1); /* Optional: add a background for better visibility */
+}
+
+.NavButton, .PrevButton {
+    color: white;
+    font-size: 2vw;
+    cursor: pointer;
+}
+
+.NavMenu {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.NavItem {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.5vw;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 600;
+    padding: 0 10px;
+    text-align: left;
+    position: relative;
+}
+
+.NavItem::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+.NavItem.active {
+    color: white;
+}
+
+.NavItem.active::after {
+    background: white;
+}
+
+/* Media Queries for finer control on different screen sizes */
+@media (max-width: 768px) {
+    .Title {
+        font-size: 7vw;
+    }
+    .InputLabel {
+        font-size: 4vw;
+    }
+    .InputField, .OutputField {
+        font-size: 3vw;
+    }
+    .ActionButton {
+        font-size: 3.5vw;
+    }
+    .NavButton, .PrevButton {
+        font-size: 4vw;
+    }
+    .NavItem {
+        font-size: 2.5vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .Title {
+        font-size: 9vw;
+    }
+    .InputLabel {
+        font-size: 5vw;
+    }
+    .InputField, .OutputField {
+        font-size: 4vw;
+    }
+    .ActionButton {
+        font-size: 4.5vw;
+    }
+    .NavButton, .PrevButton {
+        font-size: 5vw;
+    }
+    .NavItem {
+        font-size: 3.5vw;
+    }
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 1vw;
+    margin-top: 10px;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .error-message {
+        font-size: 2vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-message {
+        font-size: 3vw;
+    }
+}

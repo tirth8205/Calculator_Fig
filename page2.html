@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Page 2</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="FinalPage show">
+        <div class="Background">
+            <div class="BackgroundOverlay"></div>
+            <div class="Title">
+                Enter Your Details to Receive Your Report and Secure the Future of Your Business Today!
+            </div>
+            <div class="InputSection">
+                <div class="InputLabel">Company Name</div>
+                <div class="InputWrapper">
+                    <input type="text" class="InputField" id="companyName" placeholder="Enter your company name">
+                </div>
+                <div class="InputLabel">No of Employees</div>
+                <div class="InputWrapper">
+                    <input type="number" class="InputField" id="numEmployees" placeholder="Enter number of employees">
+                </div>
+                <div class="InputLabel">Industry</div>
+                <div class="InputWrapper">
+                    <select class="InputField" id="industry">
+                        <option value="">Select Industry</option>
+                        <option value="Manufacturing">Manufacturing</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Luxury Retail">Luxury Retail</option>
+                        <option value="Hospitality">Hospitality</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="ButtonWrapper">
+                    <div class="ActionButton" onclick="storeFormDataAndNavigate()">Calculate Now</div>
+                </div>
+                <div class="error-message" id="error-message">Please fill all fields before proceeding.</div>
+            </div>
+        </div>
+        <div class="BlurEffect"></div>
+        <img class="Logo" src="images/logo.png" alt="Logo" />
+        <div class="NavMenuWrapper">
+            <div class="NavMenu">
+                <div class="NavItem" id="step1">Sign Up!</div>
+                <div class="NavItem active" id="step2">Enter the Relevant Details</div>
+                <div class="NavItem" id="step3">Calculate the Cost</div>
+                <div class="NavItem" id="step4">Book a Discovery Call</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function storeFormDataAndNavigate() {
+            const companyName = document.getElementById('companyName').value;
+            const numEmployees = parseInt(document.getElementById('numEmployees').value);
+            const industry = document.getElementById('industry').value;
+
+            if (companyName && numEmployees && industry) {
+                const data = {
+                    companyName: companyName,
+                    numEmployees: numEmployees,
+                    industry: industry
+                };
+
+                // Save data to localStorage
+                localStorage.setItem('formData', JSON.stringify(data));
+
+                // Navigate to page3.html
+                window.location.href = 'page3.html';
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 50); // Slight delay to ensure the page is loaded before fade-in
+        });
+    </script>
+</body>
+</html>

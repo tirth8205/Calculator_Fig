@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Discovery Call</title>
+    <link rel="stylesheet" href="css/page4.css">
+    <style>
+        /* Ensure the calendar container maintains desktop dimensions */
+        .Content {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 10px;
+        }
+        .tidycal-embed {
+            width: 100%;
+            height: 800px;
+        }
+
+        @media (max-width: 768px) {
+            /* Maintain desktop-like dimensions on smaller screens */
+            .Content {
+                width: 100%;
+                max-width: 100%;
+                padding: 10px;
+            }
+            .tidycal-embed {
+                height: 800px; /* Keep the height fixed for desktop view */
+            }
+        }
+    </style>
+</head>
+<body style="display: flex; justify-content: center; align-items: center; background-color: #f4f4f9; min-height: 100vh;">
+    <div class="Content">
+        <h1>Book a Discovery Call with Janet</h1>
+        <div class="tidycal-embed" data-path="janet/discovery-call"></div>
+        <script src="https://asset-tidycal.b-cdn.net/js/embed.js" async></script>
+    </div>
+</body>
+</html>
