@@ -1,245 +1,194 @@
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+}
+
 body, html {
-    margin: 0;
-    padding: 0;
     width: 100%;
     height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: 'Roboto Flex', sans-serif;
 }
 
-.FinalPage {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
+/* Background Styles */
 .Background {
+    position: relative;
     width: 100%;
-    height: 100%;
-    position: absolute;
+    height: 100vh;
+    background: #00928F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
 .BackgroundOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    position: absolute;
-    background: #00928F;
+    background: rgba(0, 146, 143, 0.8);
+    z-index: 1;
 }
 
-.Title {
-    width: 50%;
-    max-width: 1200px;
-    height: auto;
+/* Logo */
+.Logo {
     position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+    height: auto;
+    z-index: 2;
+}
+
+/* Content Wrapper */
+.ContentWrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+/* Title */
+.Title {
     color: #F6F8FF;
-    font-size: 4vw;
-    font-family: 'Roboto Flex', sans-serif;
+    font-size: 2rem;
     font-weight: 900;
     text-transform: uppercase;
     line-height: 1.2;
-    word-wrap: break-word;
-    left: 5%;
-    top: 20%;
-    text-align: left;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
+/* Input Section */
 .InputSection {
-    width: 50%;
-    max-width: 416px;
-    margin: 0 auto;
-    padding: 20px;
-    background: none;
-    top: 40%;
-    position: relative;
-    left: 40%;
-    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
-    align-items: right;
+    gap: 20px;
+}
+
+/* Input Groups */
+.InputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .InputLabel {
-    color: white;
-    font-size: 2vw;
-    font-family: 'Roboto Flex', sans-serif;
+    color: #F6F8FF;
+    font-size: 1rem;
     font-weight: 700;
-    text-transform: capitalize;
-    letter-spacing: 1.08px;
-    word-wrap: break-word;
-    margin-top: 20px; /* Added margin to create spacing */
 }
 
-.InputWrapper, .OutputWrapper {
-    width: 100%;
-    height: 60px;
-    background: white;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px; /* Added margin to create spacing */
-}
-
-.InputField, .OutputField {
-    width: 100%;
-    height: 100%;
+.InputField {
+    padding: 10px;
     border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Roboto Flex', sans-serif;
+}
+
+.InputField:focus {
     outline: none;
-    font-size: 1.5vw;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.50);
-    padding-left: 10px;
-    border-radius: 20px; /* Added border-radius to make corners rounded */
+    box-shadow: 0 0 5px rgba(168, 144, 97, 0.8);
+}
+
+/* Action Button */
+.ButtonWrapper {
+    display: flex;
+    justify-content: center;
 }
 
 .ActionButton {
+    padding: 10px 20px;
+    background: #A89061;
     color: #0B1519;
-    font-size: 2vw;
-    font-family: 'Roboto Flex', sans-serif;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.96px;
-    word-wrap: break-word;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.ActionButton:hover {
+    background: #8e774b;
+}
+
+/* Error Message */
+.ErrorMessage {
+    color: #ff4d4d;
+    font-size: 0.9rem;
     text-align: center;
-    background: #A89061;
-    padding: 15px 30px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-top: 20px; /* Added margin-top to create more space */
+    display: none;
 }
 
-.BlurEffect {
-    width: 20vw;
-    height: auto;
-    position: absolute;
-    transform: rotate(90deg);
-    transform-origin: 0 0;
-    box-shadow: 406.5472717285156px 406.5472717285156px 406.5472717285156px;
-    border: 842.18px white solid;
-    filter: blur(406.55px);
-}
-
-.Logo {
-    width: 10vw;
-    height: auto;
-    position: absolute;
-    left: 3%;
-    top: 5%;
-}
-
-.NavMenuWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 10px 20px;
-    background: rgba(0, 0, 0, 0.1); /* Optional: add a background for better visibility */
-}
-
-.NavButton, .PrevButton {
-    color: white;
-    font-size: 2vw;
-    cursor: pointer;
-}
-
+/* Navigation Menu */
 .NavMenu {
+    position: absolute;
+    bottom: 20px;
+    width: 90%;
+    max-width: 800px;
     display: flex;
-    flex: 1;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
 }
 
 .NavItem {
     color: rgba(255, 255, 255, 0.6);
-    font-size: 1.5vw;
-    font-family: 'Roboto Flex', sans-serif;
+    font-size: 0.9rem;
     font-weight: 600;
-    padding: 0 10px;
-    text-align: left;
-    position: relative;
-}
-
-.NavItem::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.6);
-    position: absolute;
-    bottom: -5px;
-    left: 0;
+    text-align: center;
+    flex: 1;
 }
 
 .NavItem.active {
-    color: white;
+    color: #F6F8FF;
+    border-bottom: 2px solid #F6F8FF;
 }
 
-.NavItem.active::after {
-    background: white;
-}
-
-/* Media Queries for finer control on different screen sizes */
+/* Hide NavMenu on Mobile */
 @media (max-width: 768px) {
+    .NavMenuWrapper {
+        display: none;
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .ContentWrapper {
+        padding: 20px;
+    }
+
     .Title {
-        font-size: 7vw;
+        font-size: 1.5rem;
     }
-    .InputLabel {
-        font-size: 4vw;
-    }
-    .InputField, .OutputField {
-        font-size: 3vw;
-    }
-    .ActionButton {
-        font-size: 3.5vw;
-    }
-    .NavButton, .PrevButton {
-        font-size: 4vw;
-    }
-    .NavItem {
-        font-size: 2.5vw;
+
+    .InputField, .ActionButton {
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 480px) {
+    .Logo {
+        width: 80px;
+        top: 10px;
+        left: 10px;
+    }
+
     .Title {
-        font-size: 9vw;
+        font-size: 1.2rem;
     }
-    .InputLabel {
-        font-size: 5vw;
-    }
-    .InputField, .OutputField {
-        font-size: 4vw;
-    }
-    .ActionButton {
-        font-size: 4.5vw;
-    }
-    .NavButton, .PrevButton {
-        font-size: 5vw;
-    }
-    .NavItem {
-        font-size: 3.5vw;
-    }
-}
 
-/* Error message styling */
-.error-message {
-    color: red;
-    font-size: 1vw;
-    margin-top: 10px;
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .error-message {
-        font-size: 2vw;
-    }
-}
-
-@media (max-width: 480px) {
-    .error-message {
-        font-size: 3vw;
+    .InputField, .ActionButton {
+        font-size: 0.8rem;
     }
 }

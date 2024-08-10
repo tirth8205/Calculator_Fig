@@ -5,32 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Page 1</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto Flex', sans-serif;
+        }
+
+        /* Hide NavMenu on Mobile */
+        @media (max-width: 768px) {
+            .NavMenu {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="FinalPage show">
+    <div class="FinalPage">
         <div class="Background">
             <div class="BackgroundOverlay"></div>
-            <div class="Title">
-                Discover the Number of Employees Likely to Leave and Uncover the Hidden Costs Before It's Too Late!
+            <img class="Logo" src="images/logo.png" alt="Logo" />
+            <div class="ContentWrapper">
+                <div class="Title">
+                    Discover the Number of Employees Likely to Leave and Uncover the Hidden Costs Before It's Too Late!
+                </div>
+                <div class="InputSection">
+                    <div class="InputGroup">
+                        <label class="InputLabel" for="name">Name</label>
+                        <input type="text" class="InputField" id="name" placeholder="Enter your name">
+                    </div>
+                    <div class="InputGroup">
+                        <label class="InputLabel" for="email">Email Address</label>
+                        <input type="email" class="InputField" id="email" placeholder="Enter your email address">
+                    </div>
+                    <div class="ButtonWrapper">
+                        <button class="ActionButton" onclick="validateAndNavigate('page2.html')">Begin</button>
+                    </div>
+                    <div class="ErrorMessage" id="error-message">Please enter a valid email address.</div>
+                </div>
             </div>
-            <div class="InputSection">
-                <div class="InputLabel">Name</div>
-                <div class="InputWrapper">
-                    <input type="text" class="InputField" id="name" placeholder="Enter your name">
-                </div>
-                <div class="InputLabel">Email Address</div>
-                <div class="InputWrapper">
-                    <input type="email" class="InputField" id="email" placeholder="Enter your email address">
-                </div>
-                <div class="ButtonWrapper">
-                    <div class="ActionButton" onclick="validateAndNavigate('page2.html')">BEGIN</div>
-                </div>
-                <div class="error-message" id="error-message">Please enter a valid email address.</div>
-            </div>
-        </div>
-        <div class="BlurEffect"></div>
-        <img class="Logo" src="images/logo.png" alt="Logo" />
-        <div class="NavMenuWrapper">
             <div class="NavMenu">
                 <div class="NavItem active" id="step1">Sign Up!</div>
                 <div class="NavItem" id="step2">Enter the Relevant Details</div>
@@ -41,27 +56,27 @@
     </div>
     <script>
         function validateAndNavigate(page) {
-            const email = document.getElementById('email').value;
-            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value.trim();
+            const name = document.getElementById('name').value.trim();
             const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-            if (emailPattern.test(email)) {
+            if (emailPattern.test(email) && name !== '') {
                 localStorage.setItem('name', name);
                 localStorage.setItem('email', email);
 
                 document.body.style.opacity = '0';
                 setTimeout(() => {
                     window.location.href = page;
-                }, 500); // Duration matches the CSS transition duration
+                }, 500);
             } else {
-                document.getElementById('error-message').style.display = 'block';
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.textContent = name === '' ? 'Please enter your name.' : 'Please enter a valid email address.';
+                errorMessage.style.display = 'block';
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 50); // Slight delay to ensure the page is loaded before fade-in
+            document.body.style.opacity = '1';
         });
     </script>
 </body>
