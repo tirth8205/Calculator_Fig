@@ -29,9 +29,9 @@ body, html {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 90%;
     background: rgba(0, 146, 143, 0.8);
-    z-index: 1;
+    z-index: 0;
 }
 
 /* Logo */
@@ -131,35 +131,58 @@ body, html {
     display: none;
 }
 
-/* Navigation Menu */
-.NavMenu {
+/* Navigation Menu Wrapper */
+.NavMenuWrapper {
     position: absolute;
-    bottom: 20px;
-    width: 90%;
-    max-width: 800px;
+    bottom: 0;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    z-index: 2;
+    justify-content: center;
+    padding: 10px 0;
+    background: rgba(0, 0, 0, 0.1); /* Optional: add a background for better visibility */
+    z-index: 3; /* Ensure it stays on top */
 }
 
+/* Navigation Menu */
+.NavMenu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+/* Navigation Item */
 .NavItem {
     color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
+    font-size: 1.5vw;
+    font-family: 'Roboto Flex', sans-serif;
     font-weight: 600;
+    padding: 10px 20px;
     text-align: center;
-    flex: 1;
+    position: relative;
 }
 
 .NavItem.active {
-    color: #F6F8FF;
-    border-bottom: 2px solid #F6F8FF;
+    color: white;
+    font-weight: 1000;
 }
 
-/* Hide NavMenu on Mobile */
-@media (max-width: 768px) {
-    .NavMenuWrapper {
-        display: none;
-    }
+/* Navigation Item Underline */
+.NavItem::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+.NavItem.active::after {
+    background: white;
 }
 
 /* Media Queries */
