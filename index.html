@@ -20,6 +20,17 @@
                 display: none;
             }
         }
+
+        .DownloadButton {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -41,7 +52,8 @@
                         <input type="email" class="InputField" id="email" placeholder="Enter your email address">
                     </div>
                     <div class="ButtonWrapper">
-                        <button class="ActionButton" onclick="validateAndNavigate('page2.html')">Begin</button>
+                        <button class="ActionButton" id="beginButton" onclick="validateAndNavigate('page2.html')">Begin</button>
+                        <button class="DownloadButton" id="downloadButton" onclick="downloadData()">Download Data</button>
                     </div>
                     <div class="ErrorMessage" id="error-message">Please enter a valid email address.</div>
                 </div>
@@ -57,24 +69,50 @@
         </div>
     </div>
     <script>
+        const adminCredentials = {
+            name: 'AdminName',
+            email: 'admin@example.com'
+        };
+
         function validateAndNavigate(page) {
             const email = document.getElementById('email').value.trim();
             const name = document.getElementById('name').value.trim();
             const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
             if (emailPattern.test(email) && name !== '') {
-                localStorage.setItem('name', name);
-                localStorage.setItem('email', email);
+                if (name === adminCredentials.name && email === adminCredentials.email) {
+                    // Hide the begin button and show the download button
+                    document.getElementById('beginButton').style.display = 'none';
+                    document.getElementById('downloadButton').style.display = 'block';
+                } else {
+                    // Normal user flow
+                    localStorage.setItem('name', name);
+                    localStorage.setItem('email', email);
 
-                document.body.style.opacity = '0';
-                setTimeout(() => {
-                    window.location.href = page;
-                }, 500);
+                    document.body.style.opacity = '0';
+                    setTimeout(() => {
+                        window.location.href = page;
+                    }, 500);
+                }
             } else {
                 const errorMessage = document.getElementById('error-message');
                 errorMessage.textContent = name === '' ? 'Please enter your name.' : 'Please enter a valid email address.';
                 errorMessage.style.display = 'block';
             }
+        }
+
+        function downloadData() {
+            // Functionality to download data
+            const data = "This is the data to be downloaded"; // Replace with actual data or fetch it from server
+            const blob = new Blob([data], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'data.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
         }
 
         document.addEventListener('DOMContentLoaded', () => {

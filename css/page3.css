@@ -42,6 +42,7 @@ body, html {
     box-shadow: 406.5472717285156px 406.5472717285156px 406.5472717285156px;
     border: 842.18px white solid;
     filter: blur(406.55px);
+    z-index: -1;
 }
 
 /* Content Styling */

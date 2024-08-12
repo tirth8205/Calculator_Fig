@@ -1,5 +1,3 @@
-// processData.js
-
 const dbName = 'UserDataDB';
 const dbVersion = 1;
 let db;
@@ -115,5 +113,72 @@ function processAndStoreData(data) {
             console.error('Error processing data:', error);
         });
 }
+
+// Function to retrieve all data from IndexedDB
+function getAllData() {
+    return new Promise((resolve, reject) => {
+        const transaction = db.transaction(['userData'], 'readonly');
+        const objectStore = transaction.objectStore('userData');
+        const request = objectStore.getAll();
+
+        request.onsuccess = (event) => {
+            resolve(event.target.result);
+        };
+
+        request.onerror = (event) => {
+            reject(event.target.error);
+        };
+    });
+}
+
+// Function to convert data to CSV
+function convertToCSV(data) {
+    const headers = Object.keys(data[0]);
+    const csvRows = [headers.join(',')];
+
+    for (const row of data) {
+        const values = headers.map(header => JSON.stringify(row[header], replacer));
+        csvRows.push(values.join(','));
+    }
+
+    return csvRows.join('\n');
+}
+
+function replacer(key, value) {
+    return value === null ? '' : value;
+}
+
+// Function to create a downloadable file
+function downloadCSV(data) {
+    const csvData = convertToCSV(data);
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'userData.csv');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// Function to download user data
+async function downloadUserData() {
+    try {
+        const data = await getAllData();
+        downloadCSV(data);
+    } catch (error) {
+        console.error('Error downloading user data:', error);
+    }
+}
+
+// Add an event listener to the "Download Now" button to trigger the download
+document.addEventListener('DOMContentLoaded', () => {
+    const downloadButton = document.getElementById('downloadButton');
+    if (downloadButton) {
+        downloadButton.addEventListener('click', downloadUserData);
+    }
+});
 
 export { processAndStoreData, getData };
